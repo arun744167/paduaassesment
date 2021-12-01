@@ -8,13 +8,13 @@ class BankTransaction {
     protected string $txnNumber;
     protected int $customerID;
     protected string $reference;
-    protected int $amount = 0;
+    protected float $amount = 0;
 
     const VALIDCHARS = array( '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C',
         'D', 'E', 'F', 'G', 'H' ,'J', 'K','L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T',
         'U', 'V', 'W', 'X', 'Y', 'Z');
 
-    public function __construct( string $txnDate, string $txnNumber, int $customerID, string $reference, int $amount ) {
+    public function __construct( string $txnDate, string $txnNumber, int $customerID, string $reference, float $amount ) {
         $this->setTxnDate( $txnDate );
         $this->setTxnNumber( $txnNumber );
         $this->setCustomerID( $customerID );
@@ -80,17 +80,21 @@ class BankTransaction {
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getAmount(): int {
-        return $this->amount;
+    public function getAmount(): string {
+        return number_format( (float) $this->amount, 2, '.', ',');
     }
 
     /**
-     * @param int $amount
+     * @param float $amount
      */
-    public function setAmount( int $amount ): void {
+    public function setAmount( float $amount ): void {
         $this->amount = $amount;
+    }
+
+    public function isDebitedOrCredited(): string {
+       return $this->amount > 1 ? 'blue' : 'red';
     }
 
     public function getTransactionStatus(): string {

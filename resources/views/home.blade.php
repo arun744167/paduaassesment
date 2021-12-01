@@ -48,7 +48,7 @@
                                 <td data-label="Valid Transaction?">{{ $record->getTransactionStatus() }} </td>
                                 <td data-label="Customer Number">{{ $record->getCustomerID() }}</td>
                                 <td data-label="Reference">{{ $record->getReference() }}</td>
-                                <td data-label="Amount">{{ $record->getAmount() }}</td>
+                                <td data-label="Amount" style="color: {{ $record->isDebitedOrCredited() }}">{{ $record->getAmount() }}</td>
                             </tr>
                         </tbody>
                         @endforeach
