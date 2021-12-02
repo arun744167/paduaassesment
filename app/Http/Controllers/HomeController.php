@@ -7,7 +7,8 @@ use File;
 
 class HomeController extends Controller
 {
-    public function index( Request $request ) {
+    public function index( Request $request )
+    {
 
         $path = storage_path('app/banktxndata/BankTransactions.csv');
 

@@ -14,7 +14,8 @@ class BankTransaction {
         'D', 'E', 'F', 'G', 'H' ,'J', 'K','L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T',
         'U', 'V', 'W', 'X', 'Y', 'Z');
 
-    public function __construct( string $txnDate, string $txnNumber, int $customerID, string $reference, float $amount ) {
+    public function __construct( string $txnDate, string $txnNumber, int $customerID, string $reference, float $amount )
+    {
         $this->setTxnDate( $txnDate );
         $this->setTxnNumber( $txnNumber );
         $this->setCustomerID( $customerID );
@@ -25,7 +26,8 @@ class BankTransaction {
     /**
      * @return string
      */
-    public function getTxnDate(): string {
+    public function getTxnDate(): string
+    {
         $date = strtotime( $this->txnDate) ;
         return  date('d/m/Y h:i:s', $date);;
     }
@@ -33,82 +35,94 @@ class BankTransaction {
     /**
      * @param string $txnDate
      */
-    public function setTxnDate( string $txnDate ): void {
+    public function setTxnDate( string $txnDate ): void
+    {
         $this->txnDate = $txnDate;
     }
 
     /**
      * @return string
      */
-    public function getTxnNumber(): string {
+    public function getTxnNumber(): string
+    {
         return $this->txnNumber;
     }
 
     /**
      * @param string $txnNumber
      */
-    public function setTxnNumber( string $txnNumber ): void {
+    public function setTxnNumber( string $txnNumber ): void
+    {
         $this->txnNumber = $txnNumber;
     }
 
     /**
      * @return int
      */
-    public function getCustomerID(): int {
+    public function getCustomerID(): int
+    {
         return $this->customerID;
     }
 
     /**
      * @param int $customerID
      */
-    public function setCustomerID( int $customerID ): void {
+    public function setCustomerID( int $customerID ): void
+    {
         $this->customerID = $customerID;
     }
 
     /**
      * @return string
      */
-    public function getReference(): string {
+    public function getReference(): string
+    {
         return $this->reference;
     }
 
     /**
      * @param string $reference
      */
-    public function setReference( string $reference ): void {
+    public function setReference( string $reference ): void
+    {
         $this->reference = $reference;
     }
 
     /**
      * @return string
      */
-    public function getAmount(): string {
+    public function getAmount(): string
+    {
         return number_format( (float) $this->amount, 2, '.', ',');
     }
 
     /**
      * @param float $amount
      */
-    public function setAmount( float $amount ): void {
+    public function setAmount( float $amount ): void
+    {
         $this->amount = $amount;
     }
 
-    public function isDebitedOrCredited(): string {
+    public function isDebitedOrCredited(): string
+    {
        return $this->amount > 1 ? 'blue' : 'red';
     }
 
-    public function getTransactionStatus(): string {
+    public function getTransactionStatus(): string
+    {
 
         $validTxn = 'No';
 
-        if ( $this->VerifyKey( $this->txnNumber ) ){
+        if ( $this->VerifyKey( $this->txnNumber ) ) {
             $validTxn = 'Yes';
         }
 
         return $validTxn;
     }
 
-    private function VerifyKey( string $key ): bool {
+    private function VerifyKey( string $key ): bool
+    {
 
         if ( strlen( $key ) != 10){
             return false;
@@ -120,7 +134,8 @@ class BankTransaction {
     }
 
     // Implementation of algorithm for check digit.
-    private function GenerateCheckCharacter( string $input ) : string {
+    private function GenerateCheckCharacter( string $input ) : string
+    {
         $factor = 2;
         $sum = 0;
         $n = count( self::VALIDCHARS);
@@ -147,5 +162,4 @@ class BankTransaction {
         $checkCodePoint = ( $n - $remainder ) % $n;
         return self::VALIDCHARS[$checkCodePoint];
     }
-
 }

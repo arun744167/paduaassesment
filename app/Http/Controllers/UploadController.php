@@ -9,7 +9,8 @@ use PhpParser\Node\Expr\Cast\Object_;
 class UploadController extends Controller
 {
 
-    public function uploadCsv ( Request $request ) {
+    public function uploadCsv ( Request $request )
+    {
 
         if ( $request->hasFile('csvfile') ) {
 
@@ -32,7 +33,8 @@ class UploadController extends Controller
        return redirect()->back();
     }
 
-    private function sortTransaction( array $txnObject ) {
+    private function sortTransaction( array $txnObject )
+    {
         usort($txnObject, function($a, $b) {
                 if ( strtotime( $a->getTxnDate() ) < strtotime( $b->getTxnDate() ) ) {
                     return 1;
@@ -49,7 +51,8 @@ class UploadController extends Controller
         return $txnObject;
     }
 
-    private function getBankStatementfromCSV() : array {
+    private function getBankStatementfromCSV() : array
+    {
         $fileName = storage_path('app/banktxndata/BankTransactions.csv');
         $fileHandler = fopen( $fileName, 'r');
         $line_of_text = [];
